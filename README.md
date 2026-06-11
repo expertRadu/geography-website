@@ -6,7 +6,7 @@ This project was engineered independently of visual website builders, automated 
 
 ---
 
-## 🗺️ Core User Features
+# Core User Features
 
 The platform is split into two main structural interaction environments, accommodating different learning dynamics:
 

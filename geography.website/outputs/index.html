@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GlobeQuest</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="./styles.css?v=2" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="globe-panel" aria-label="Interactive globe">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">GlobeQuest</p>
+            <h1>Learn the world by touch, distance, and discovery</h1>
+          </div>
+          <div class="mode-switch" role="group" aria-label="Mode">
+            <button class="mode-button active" id="learnMode" type="button">Learn</button>
+            <button class="mode-button" id="testMode" type="button">Test</button>
+          </div>
+        </header>
+
+        <div class="globe-stage">
+          <svg id="globe" role="img" aria-label="Rotatable globe map"></svg>
+          <div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+          <div class="loading" id="loading">Loading the globe...</div>
+        </div>
+
+        <footer class="globe-controls">
+          <button id="resetView" type="button" title="Reset view">Reset</button>
+          <label for="zoomRange">Zoom</label>
+          <input id="zoomRange" type="range" min="220" max="720" value="380" />
+          <span id="zoomValue">100%</span>
+        </footer>
+      </section>
+
+      <aside class="info-panel" aria-label="Country information and quiz">
+        <section class="country-card" id="learnPanel">
+          <p class="panel-label">Selected country</p>
+          <h2 id="countryName">Choose a country</h2>
+          <p class="muted" id="countryPrompt">Hover to see names. Click a country to view population, major religions, and recent disaster reporting.</p>
+
+          <div class="stat-grid" id="stats" hidden>
+            <div>
+              <span>Population</span>
+              <strong id="population">-</strong>
+            </div>
+            <div>
+              <span>Capital</span>
+              <strong id="capital">-</strong>
+            </div>
+          </div>
+
+          <div class="detail-block" id="religionBlock" hidden>
+            <h3>Predominant religions</h3>
+            <div id="religions"></div>
+          </div>
+
+          <div class="detail-block" id="disasterBlock" hidden>
+            <h3>Most recent disaster data</h3>
+            <p id="disaster"></p>
+            <a id="disasterLink" href="#" target="_blank" rel="noreferrer">Open source</a>
+          </div>
+        </section>
+
+        <section class="quiz-card hidden" id="quizPanel">
+          <p class="panel-label">Knowledge test</p>
+          <h2>Find the secret country</h2>
+          <p class="muted">Type a country name. Each guess lights up on the globe and tells you how far you are from the answer.</p>
+
+          <form class="guess-form" id="guessForm">
+            <input id="guessInput" type="text" placeholder="Enter a country..." autocomplete="off" />
+            <button type="submit">Guess</button>
+          </form>
+
+          <div class="feedback" id="feedback">A random country is ready.</div>
+          <ol class="guess-list" id="guessList" aria-label="Previous guesses"></ol>
+
+          <div class="quiz-actions hidden" id="winActions">
+            <button id="playAgain" type="button">Play again</button>
+            <button id="exitQuiz" type="button">Exit to learn</button>
+          </div>
+        </section>
+
+        <section class="source-note">
+          <h3>Data note</h3>
+          <p>Population and capitals load from REST Countries. Disaster summaries use ReliefWeb when available. Religion percentages are broad study references included locally for learning context.</p>
+        </section>
+      </aside>
+    </main>
+
+    <script src="./vendor/d3.min.js"></script>
+    <script src="./vendor/topojson-client.min.js"></script>
+    <script src="./app.js?v=2"></script>
+  </body>
+</html>
